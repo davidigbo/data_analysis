@@ -20,7 +20,7 @@ def recommend(movie_index: int):
     return {"recommended_movie_indices": indices.tolist()}
 
 
- import streamlit as st
+import streamlit as st
 # import requests
 
 # st.title("Movie Recommendation Engine")
