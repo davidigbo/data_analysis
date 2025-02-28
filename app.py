@@ -20,13 +20,26 @@ def recommend(movie_index: int):
     return {"recommended_movie_indices": indices.tolist()}
 
 
-import streamlit as st
+# import streamlit as st
+# import requests
+
+# st.title("Movie Recommendation Engine")
+
+# movie_index = st.number_input("Enter a movie index:", min_value=0, value=0)
+# if st.button("Get Recommendations"):
+#     response = requests.get(f"http://127.0.0.1:8000/recommend/{movie_index}")
+#     recommendations = response.json().get("recommended_movie_indices", [])
+#     st.write("Recommended Movie Indices:", recommendations)
+
 import requests
 
-st.title("Movie Recommendation Engine")
+BACKEND_URL = "https://your-backend.onrender.com"
 
-movie_index = st.number_input("Enter a movie index:", min_value=0, value=0)
-if st.button("Get Recommendations"):
-    response = requests.get(f"http://127.0.0.1:8000/recommend/{movie_index}")
-    recommendations = response.json().get("recommended_movie_indices", [])
-    st.write("Recommended Movie Indices:", recommendations)
+movie_index = 2  # Example movie index
+response = requests.get(f"{BACKEND_URL}/recommend/{movie_index}")
+
+if response.status_code == 200:
+    recommendations = response.json()
+    st.write("Recommended movies:", recommendations)
+else:
+    st.write("Error fetching recommendations")
