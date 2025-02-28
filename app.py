@@ -33,7 +33,7 @@ def recommend(movie_index: int):
 
 import requests
 
-BACKEND_URL = "https://your-backend.onrender.com"
+BACKEND_URL = "https://data-analysis-2-pfv6.onrender.com/"
 
 movie_index = 2  # Example movie index
 response = requests.get(f"{BACKEND_URL}/recommend/{movie_index}")
