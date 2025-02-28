@@ -18,3 +18,15 @@ knn.fit(movie_features)
 def recommend(movie_index: int):
     distances, indices = knn.kneighbors(movie_features[movie_index].reshape(1, -1), n_neighbors=3)
     return {"recommended_movie_indices": indices.tolist()}
+
+
+import streamlit as st
+import requests
+
+st.title("Movie Recommendation Engine")
+
+movie_index = st.number_input("Enter a movie index:", min_value=0, value=0)
+if st.button("Get Recommendations"):
+    response = requests.get(f"http://127.0.0.1:8000/recommend/{movie_index}")
+    recommendations = response.json().get("recommended_movie_indices", [])
+    st.write("Recommended Movie Indices:", recommendations)
